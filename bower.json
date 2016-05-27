@@ -1,0 +1,23 @@
+{
+  "name": "batepapo",
+  "description": "Trabalho para de av2 internet rica",
+  "main": "server.js",
+  "authors": [
+    "Erison Silva"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "batepapo",
+    "nodeJs",
+    "erisonsilva",
+    "erison",
+    "silva"
+  ],
+  "homepage": "https://github.com/eerison/batepapo",
+  "moduleType": [],
+  "private": true,
+  "dependencies": {
+    "Materialize": "materialize#~0.97.6",
+    "angular": "~1.5.5"
+  }
+}

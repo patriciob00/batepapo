@@ -1,0 +1,32 @@
+{
+  "name": "batepapo",
+  "version": "1.0.0",
+  "description": "Trabalho para de av2 internet rica",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eerison/batepapo.git"
+  },
+  "keywords": [
+    "batepapo",
+    "nodeJs",
+    "erisonsilva",
+    "erison",
+    "silva"
+  ],
+  "author": "Erison Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eerison/batepapo/issues"
+  },
+  "homepage": "https://github.com/eerison/batepapo#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "bower": "^1.7.9",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.19"
+  }
+}
