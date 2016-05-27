@@ -99,7 +99,7 @@ router.route('/mensagem')
 
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function(req, res) {
-        Usuario.find(function(err, users) {
+        Usuario.query(req.query, function(err, users) {
             if (err)
                 res.send(err);
 

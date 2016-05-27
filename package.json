@@ -27,6 +27,7 @@
     "body-parser": "^1.15.1",
     "bower": "^1.7.9",
     "express": "^4.13.4",
-    "mongoose": "^4.4.19"
+    "mongoose": "^4.4.19",
+    "mongoose-query": "^0.2.0"
   }
 }
