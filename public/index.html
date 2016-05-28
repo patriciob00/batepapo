@@ -108,40 +108,63 @@
               </div>
           </div>
         </div>
-        
-        
+    
         <!-- chat -->
-        <div ng-hide="usuarioLogado != null">
-            <div class="row">
-              <div class="col s12 z-depth-6 card-panel">
-                
-                <!-- quem esta enviando a mensagem -->
-                <div class="row">
-                  <div class="col s10">
-                    <div class="card-panel grey lighten-5">
-                      <div class="right-text flow-text">Lilian <hr /></div>
-                      <span class="darken-4-text">I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-                      </span>
-                    </div>
-                  </div>
-                </div>
+        <div ng-hide="usuarioLogado == null">
 
-                <!-- quem esta logado -->
-                <div class="row">
-                  <div class="col s10 offset-s2">
+            <div class="row">
+
+              <!-- conversa -->
+              <div class="col s12 z-depth-6 card-panel" id="chatbox">
+                
+
+                <div class="row" ng-repeat="value in conversa">
+
+                  <!-- quem esta enviando a mensagem -->
+                  <div class="col s10" ng-hide="value.remetente._id == usuarioLogado._id">
+                    <div class="card-panel grey lighten-5">
+                      <div class="right-text flow-text">{{value.remetente.nome}} <hr /></div>
+                      <span class="darken-4-text">{{value.msg}}</span>
+                    </div>
+                  </div> <!-- quem esta enviando a mensagem -->
+
+                  <!-- quem esta logado -->
+                  <div class="col s10 offset-s2" ng-show="value.remetente._id == usuarioLogado._id">
                     <div class="card-panel green">
                       <span class="white-text">
 
-                      <div class="right-text flow-text">Erison <hr /></div>
-                      I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+                      <div class="right-text flow-text">{{value.remetente.nome}} <hr /></div>
+                      {{value.msg}}
                       </span>
                     </div>
-                  </div>
+                  </div><!-- /quem esta logado -->
+
                 </div>
 
-              </div>
+
+                <!-- escrever mensagem -->
+                <div class="row">
+                  <form class="col s12" ng-submit="enviarMsg();">
+                    <div class="row">
+
+                      <div class="input-field col s10">
+                        <textarea id="textarea1" class="materialize-textarea" ng-model="msg.mensagem"></textarea>
+                        <label for="textarea1">Mensagem</label>
+                      </div><!-- textarea -->
+
+
+                      <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light" type="submit">Submit
+                          <i class="material-icons right">send</i>
+                        </button>
+                      </div><!-- submit -->
+                    </div>
+
+                  </form>
+                </div><!-- /escrever mensagem -->
+
+              </div><!-- /conversa -->
+
             </div>
         </div>
         

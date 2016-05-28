@@ -46,7 +46,7 @@ router.get('/', function(req, res) {
 router.route('/mensagem')
     // create a bear (accessed at POST http://localhost:8080/api/bears)
     .post(function(req, res) {
-        var msg = new Mensagem();      // create a new instance of the Bear model
+        var msg = new Mensagem();      
         msg.remetente    = req.body.remetente;
         msg.destinatario = req.body.destinatario;
         msg.msg          = req.body.msg;
@@ -63,7 +63,7 @@ router.route('/mensagem')
 
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function(req, res) {
-        Mensagem.find(function(err, msgs) {
+        Mensagem.query(req.query,function(err, msgs) {
             if (err)
                 res.send(err);
 

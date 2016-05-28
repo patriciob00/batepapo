@@ -1,10 +1,13 @@
 
 var batepapo = angular.module('appBatepapo', []);
 
-batepapo.controller('batepapoController', ['$scope', '$http', function($scope, $http) {
+batepapo.controller('batepapoController', ['$scope', '$http', '$location', '$anchorScroll','$timeout', function($scope, $http, $location, $anchorScroll, $timeout) {
   
   //usuario atual logado
   $scope.usuarioLogado = null;
+  $scope.conversa = [];
+  $scope.paramsMsg = [];
+
 
   //login
   $scope.submitLogin = function(){
@@ -14,8 +17,12 @@ batepapo.controller('batepapoController', ['$scope', '$http', function($scope, $
     $http.get(url, {params: login})
 
           .then(function(response){
-            if(!angular.isUndefined(response.data[0]))
-              $scope.usuarioLogado = response.data;
+            var usuario = response.data[0];
+            if(!angular.isUndefined(usuario)) {
+              delete usuario.senha
+              $scope.usuarioLogado = usuario;
+              $scope.buscarMsg();
+            }
             else
               Materialize.toast('Login ou senha incorreto', 4000);
           });
@@ -29,8 +36,12 @@ batepapo.controller('batepapoController', ['$scope', '$http', function($scope, $
     $http.post(url,cadastro)
 
           .then(function(response){
-            if(!angular.isUndefined(response.data[0]))
-              $scope.usuarioLogado = response.data;
+            var usuario = response.data[0];
+            if(!angular.isUndefined(usuario)){
+              delete usuario.senha;
+              $scope.usuarioLogado = usuario;
+              $scope.buscarMsg();
+            }
             else
               Materialize.toast('Login ou senha incorreto', 4000);
 
@@ -39,5 +50,38 @@ batepapo.controller('batepapoController', ['$scope', '$http', function($scope, $
           });
 
   }
+
+  //enviarMsgm
+  $scope.enviarMsg = function(){
+    var msg = this.msg;
+    var url = '/api/mensagem';
+
+    $http.post(url, {msg : msg.mensagem, remetente : $scope.usuarioLogado})
+    .then(function(response){
+            $scope.msg.mensagem = '';
+            $scope.buscarMsg();
+          });
+  }
+
+  //buscarMsg
+  $scope.buscarMsg = function(){
+
+
+
+        var url = '/api/mensagem';
+        $http.get(url, {params : $scope.paramsMsg})
+
+          .then(function(response){
+            $scope.conversa = response.data;
+            
+            $location.hash('bottom');
+            $anchorScroll();  
+            $timeout(function(){$scope.buscarMsg()}, 3000);          
+          });
+
+          
+  }
+
+
 
   }]);
