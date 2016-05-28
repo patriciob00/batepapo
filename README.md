@@ -11,7 +11,7 @@
 	- bower install
 
 * iniciar servidor
-	- node service.js
+	- node server.js
 
 * acessar servidor 
 	- localhost:8081
