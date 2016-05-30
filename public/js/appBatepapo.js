@@ -36,7 +36,7 @@ batepapo.controller('batepapoController', ['$scope', '$http', '$location', '$anc
     $http.post(url,cadastro)
 
           .then(function(response){
-            var usuario = response.data[0];
+            var usuario = response.data;
             if(!angular.isUndefined(usuario)){
               delete usuario.senha;
               $scope.usuarioLogado = usuario;
