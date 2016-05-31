@@ -118,7 +118,7 @@
               <div class="col s12 z-depth-6 card-panel" id="chatbox">
                 
 
-                <div class="row" ng-repeat="value in conversa">
+                <div class="row" ng-repeat="value in conversa | orderBy : 'data'">
 
                   <!-- quem esta enviando a mensagem -->
                   <div class="col s10" ng-hide="value.remetente._id == usuarioLogado._id">

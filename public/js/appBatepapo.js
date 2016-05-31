@@ -66,10 +66,11 @@ batepapo.controller('batepapoController', ['$scope', '$http', '$location', '$anc
   //buscarMsg
   $scope.buscarMsg = function(){
 
-
-
         var url = '/api/mensagem';
-        $http.get(url, {params : $scope.paramsMsg})
+        $http.get(url, {params : {
+          s : {"data" : "desc"},
+          limit : 10
+        }})
 
           .then(function(response){
             $scope.conversa = response.data;
