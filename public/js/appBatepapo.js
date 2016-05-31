@@ -82,6 +82,20 @@ batepapo.controller('batepapoController', ['$scope', '$http', '$location', '$anc
           
   }
 
+  //deletar msg
+  $scope.deletarMsg = function(mensagem){
+
+    var url = '/api/mensagem/' + mensagem._id;
+
+    if(confirm('Deseja deletar esta mensagem?')){
+            $http.delete(url)
+            .then(function(response){
+                $scope.buscarMsg();
+                Materialize.toast('mensagem deletada com sucesso!', 4000);
+            });
+    }
+  }
+
 
 
   }]);

@@ -71,6 +71,18 @@ router.route('/mensagem')
         });
     });
 
+router.route('/mensagem/:msg_id')
+    .delete(function(req, res) {
+        Mensagem.remove({
+            _id: req.params.msg_id
+        }, function(err, bear) {
+            if (err)
+                res.send(err);
+
+            res.json(true);
+        });
+    });
+
 
 
 
