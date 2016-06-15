@@ -27,9 +27,19 @@ angular
 			})
 		}
 
+		var _searchMessage = function () {
+			return $http.get(config.apiMSG, params : {  s : {"data" : "desc"}, limit : 10 }} );
+		}
+
+		var _deleteMessage = function (obj) {
+			return $http.delete(config.apiMSG +"/"+ obj);
+		}
+
 	 return {
 		login : _login,
 		newUser : _newUser,
-		sendMessage : _sendMessage
+		sendMessage : _sendMessage,
+		searchMessage : _searchMessage,
+		deleteMessage : _deleteMessage
 	 };
 	}

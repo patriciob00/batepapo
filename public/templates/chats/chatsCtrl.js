@@ -33,7 +33,7 @@
 			              delete usuario.senha;
 			              $scope.usuarioLogado = usuario;
 			              $scope.buscarMsg();
-			              Materialize.toast('Usuario cadastrado com sucesso');
+			              Materialize.toast('Usuario cadastrado com sucesso', 3000);
 		            } 
 		          }, function(error){
 		            console.log(error);
@@ -49,35 +49,18 @@
 
 		  //buscarMsg
 		  $scope.buscarMsg = function(){
-
-		        var url = '/api/mensagem';
-		        $http.get(url, {params : {
-		          s : {"data" : "desc"},
-		          limit : 10
-		        }})
-
-		          .then(function(response){
-		            $scope.conversa = response.data;
-		            
+		  	chatAPI.searchMessage().then(function(response) {
+		  		  	$scope.conversa = response.data;      
 		            $location.hash('bottom');
 		            $anchorScroll();  
-		            $timeout(function(){$scope.buscarMsg()}, 3000);          
-		          });
-		          
-		  }
+		            $timeout(function(){$scope.buscarMsg()}, 3000);
+		  	})
 
 		  //deletar msg
-		  $scope.deletarMsg = function(mensagem){
-
-		    var url = '/api/mensagem/' + mensagem._id;
-
-		    if(confirm('Deseja deletar esta mensagem?')){
-		            $http.delete(url)
-		            .then(function(response){
-		                $scope.buscarMsg();
-		                Materialize.toast('mensagem deletada com sucesso!', 4000);
-		            });
-		    }
-		  }
+		  $scope.deletarMsg = function(obj){
+		  	chatAPI.deleteMessage(obj._id).then(function(response) {
+		  		$scope.buscarMsg();
+		        Materialize.toast('mensagem deletada com sucesso!', 4000);
+		  	})
 	};
 })();
