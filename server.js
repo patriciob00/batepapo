@@ -8,8 +8,12 @@ var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost/batepapo'); // connect to our database
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/'));
 
+// set the home page route
+app.get('/', function(req, res) {
+    res.render('index');
+});
 
 //required
 var Mensagem        = require('./app/models/mensagem');

@@ -1,0 +1,172 @@
+<div>
+  <div class="row" ng-controller="chatsCtrl">
+
+  <!-- login e cadastro -->
+    <div ng-show="!usuarioLogado">
+
+        <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a href="#test1">Login</a></li>
+          <li class="tab col s3"><a href="#test2">Cadastro</a></li>
+        </ul>
+      </div>
+
+      <!-- login -->
+      <div id="test1" class="col s12">
+
+          <div class="row">
+
+            <div class="col s12 z-depth-6 card-panel">
+              <form class="login-form" name="login" ng-submit="submitLogin(login);">
+
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="mdi-social-person-outline prefix"></i>
+                    <input class="validate" required title="Digite um email válido no formato exemplo@exemplo.com/.br" type="email" ng-model='login.email' placeholder="Digite seu email">
+                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                  </div>
+                </div>
+                
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="mdi-action-lock-outline prefix"></i>
+                    <input type="password" title="Digite sua senha" placeholder="Digite sua senha" ng-model='login.password' required>
+                    <label for="password">Password</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light col s12" type="submit">Login</button>
+                  </div>
+                </div>
+
+
+              </form>
+            </div>
+
+          </div>
+
+      </div>
+
+
+      <!-- cadastro -->
+      <div id="test2" class="col s12">
+                    <div class="row">
+
+            <div class="col s12 z-depth-6 card-panel">
+              <form class="login-form" name="cadastro" ng-submit="submitCadastro(cadastro);">
+
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="mdi-social-person-outline prefix"></i>
+                    <input class="validate" title="Digite seu nome completo" type="text" ng-model="cadastro.nome" placeholder="Digite seu nome completo" required>
+                    <label for="nome" data-error="wrong" data-success="right">Nome</label>
+                  </div>
+                </div>
+
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="mdi-social-person-outline prefix"></i>
+                    <input class="validate" type="email" title="Digite seu email" placeholder="Digite seu email" ng-model="cadastro.email" required>
+                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                  </div>
+                </div>
+                
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="mdi-action-lock-outline prefix"></i>
+                    <input type="password" title="Digite sua senha" placeholder="Digite sua senha" ng-model="cadastro.senha" required>
+                    <label for="password">Password</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light col s12" type="submit">Cadastrar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+    <!-- chat -->
+    <div ng-hide="!usuarioLogado">
+
+        <div class="row">
+
+          <!-- conversa -->
+          <div class="col s12 z-depth-6 card-panel" id="chatbox">
+            
+
+            <div class="row" ng-repeat="value in conversa | orderBy : 'data'">
+
+              <!-- quem esta enviando a mensagem -->
+              <div class="col s10" ng-hide="value.remetente._id == usuarioLogado._id">
+                <div class="card-panel grey lighten-5">
+                  <div class="right-text flow-text">{{value.remetente.nome}} <hr /></div>
+                  <span class="darken-4-text">{{value.msg}}</span>
+                </div>
+              </div> 
+              <!-- quem esta enviando a mensagem -->
+
+              <!-- quem esta logado -->
+              <div class="col s10 offset-s2" ng-show="value.remetente._id == usuarioLogado._id">
+                <div class="card-panel green">
+                  <span class="white-text">
+
+                  <div class="row">
+                    <div class="col s10 right-text flow-text">
+                      {{value.remetente.nome}}
+                    </div>
+                    <div class="col s2">
+                      <a class="waves-effect waves-light btn" ng-click='deletarMsg(value)'>Deletar</a>
+                    </div>
+                  </div>
+                  <hr />
+
+                  {{value.msg}}
+                  </span>
+                </div>
+              </div>
+              <!-- /quem esta logado -->
+
+            </div>
+
+
+            <!-- escrever mensagem -->
+            <div class="row">
+              <form class="col s12" name="message" ng-submit="enviarMsg(message);">
+                <div class="row">
+
+                  <!-- textarea -->
+                  <div class="input-field col s10">
+                    <textarea title="Digite sua mensagem" required placeholder="Digite sua mensagem" class="materialize-textarea" ng-model="message.mensagem"></textarea>
+                    <label for="textarea1">Mensagem</label>
+                  </div>
+                  <!-- textarea -->
+
+                  <!-- botão enviar -->
+                  <div class="input-field col s2">
+                    <button class="btn waves-effect waves-light" ng-disabled="message.$invalid" type="submit">Enviar
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                  <!-- submit -->
+
+                </div>
+
+              </form>
+            </div>
+            <!-- /escrever mensagem -->
+
+          </div><!-- /conversa -->
+
+        </div>
+    </div>
+  </div>
+</div>
+    
